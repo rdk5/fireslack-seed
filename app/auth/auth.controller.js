@@ -13,6 +13,7 @@ angular.module('angularfireSlackApp')
     }, function (error){
         authCtrl.error = error;
        });
+       
     };
 
     authCtrl.register = function (){
