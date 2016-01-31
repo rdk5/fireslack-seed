@@ -38,7 +38,22 @@ angular
         url: '/register',
         controller: 'AuthCtrl as authCtrl',
         templateUrl: 'auth/register.html'
-      });
+      })
+      .state('profile',{
+        url: '/profile',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('home');
+            });
+          },
+          profile: function(Users, Auth){
+            return Auth.$requireAuth().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded();
+            });
+          }
+        }
+      })
 
     $urlRouterProvider.otherwise('/');
   })
