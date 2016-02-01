@@ -19,6 +19,15 @@ angular
       .state('home', {
         url: '/',
         templateUrl: 'home/home.html'
+        resolve: {
+          requireNoAuth: function($state, Auth){
+            return Auth.$requireAuth().then(function(auth){
+              $state.go('channels');
+            }, function(error){
+              return;
+            });
+          }
+        }
       })
       .state('login', {
           url: '/login',
@@ -68,6 +77,8 @@ angular
       });
       .state('channels', {
         url: '/channels',
+        controller: 'channelsCtrl as channelsCtrl',
+        templateUrl: 'channels/index.html',
         resolve: {
           channels: function (Channels){
             return Channels.$loaded();
@@ -86,6 +97,11 @@ angular
             });
           }
         }
+      })
+      .state('channels.create', {
+        url: '/create',
+        templateUrl: 'channels/create.html',
+        controller: 'ChannelsCtrl as channelsCtrl'
       })
 
     $urlRouterProvider.otherwise('/');
