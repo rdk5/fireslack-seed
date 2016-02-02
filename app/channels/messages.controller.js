@@ -1,19 +1,22 @@
 angular.module('angularfireSlackApp')
-.controller('MessageCtrl', function(profile, channelName, message){
-  var messageCtrl = this;
+  .controller('MessagesCtrl', function (profile, channelName, messages) {
+      var messagesCtrl = this;
 
-  messageCtrl.messages = messages;
-  messageCtrl.channelName = channelName;
+      messagesCtrl.messages = messages;
+      messagesCtrl.channelName = channelName;
 
-  messageCtrl.message = '';
+      messagesCtrl.message = '';
 
-  messageCtrl.sendMessage = function(){
-    if(messagesCtrl.message.length > 0){
-      messageCtrl.messages.$add({
-        uid: profile.$id,
-        body: messageCtrl.message,
-        timestamp: Firebase.ServerValue.TIMESTAMP
-      }).then(function.message = '';
-    )};
-  }
-});
+      messagesCtrl.sendMessage = function () {
+          if (messagesCtrl.message.length > 0) {
+              messagesCtrl.messages.$add({
+                  uid: profile.$id,
+                  body: messagesCtrl.message,
+                  timestamp: Firebase.ServerValue.TIMESTAMP
+              }).then(function () {
+                  messagesCtrl.message = '';
+              });
+          }
+      };
+
+  });

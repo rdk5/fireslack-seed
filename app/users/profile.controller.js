@@ -1,14 +1,13 @@
 angular.module('angularfireSlackApp')
-.controller('ProfileCtrl', function($state, md5, auth, profile){
-  var profileCtrl = this;
+  .controller('ProfileCtrl', function ($state, md5, auth, profile) {
+      var profileCtrl = this;
 
-  profileCtrl.profile = profile;
+      profileCtrl.profile = profile;
 
-//Get current email from router and then hashing it
-  profileCtrl.updateProfile = function(){
-    profileCtrl.profile.emailHash = md5.createHash(auth.password.email);
-    profileCtrl.profile.$save().then(function(){
-      $state.go('channels');
-    });
-  };
-});
+      profileCtrl.updateProfile = function () {
+          profileCtrl.profile.emailHash = md5.createHash(auth.password.email);
+          profileCtrl.profile.$save().then(function () {
+              $state.go('channels');
+          });
+      };
+  });
