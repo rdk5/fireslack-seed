@@ -1,4 +1,5 @@
 {
-  "firebase": "firebase-name-here",
+  "firebase": "fireslack-rdk5",
   "public": "dist"
+
 }
